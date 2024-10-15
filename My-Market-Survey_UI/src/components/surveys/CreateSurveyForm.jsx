@@ -7,7 +7,8 @@ export const CreateSurveyForm = () => {
         '', 
         ''
     ]);
-    // const [otherThoughts, setOtherThoughts] = useState("");
+    const [isChecked, setIsChecked] = useState(false);
+    const [otherThoughts, setOtherThoughts] = useState("");
 
     const handleAnswerOptionsChange = (index, e) => {
         let data = [...answerOptions];
@@ -26,14 +27,24 @@ export const CreateSurveyForm = () => {
         setAnswerOptions(data);
     };
 
+    const handleCheckboxChange = () => {
+        setIsChecked(!isChecked);
+    };
+
+    const clearSurvey = () => {
+        setProductName('');
+        setQuestion('');
+        setAnswerOptions(['', '']);
+    };
+
     const submit = (e) => {
         e.preventDefault();
-        console.log(productName, question, answerOptions);
+        console.log(productName, question, answerOptions, isChecked);
     };
 
     return (
     <>
-        <form onSubmit={submit}>
+        <form>
             <div className="form-group">
                 <label className="form-label">
                     Product Name
@@ -79,31 +90,41 @@ export const CreateSurveyForm = () => {
                     </div>
                 )
             })}
-            <button onClick={addFields} className='add'>+ Option</button>
-{/* // TODO: If other thoughts section is checked, a textarea field appears and is required */}
             <div className="form-group">
-                <label className="form-label">
+                <label htmlFor='checkbox' className="form-label">
                     Other Thoughts Section
                     <input
                         type="checkbox"
-                        // className="form-control"
-                        // name='otherThoughts'
-                        // value={otherThoughts}
-                        // onChange={(e) => setOtherThoughts(e.target.value)}
+                        id='checkbox'
+                        name='isChecked'
+                        checked={isChecked}
+                        onChange={handleCheckboxChange}
                     />
                 </label >
             </div>
-
-            <button type="submit" className="">
-                Create
-            </button>
+            {isChecked &&
+                <textarea
+                    rows={3}
+                    className="form-control"
+                    name='otherThoughts'
+                    value={otherThoughts}
+                    onChange={(e) => setOtherThoughts(e.target.value)}
+                    required
+                />
+            }
         </form>
+
+        <div className='side-by-side-buttons'>
+            <button onClick={addFields} className='add'>+ Option</button>
+            <button onClick={clearSurvey} className='clear'>Clear Survey</button>
+        </div>
 
         <br/>
 
-        <div className='side-by-side-buttons'>
-            <button className='clear'>Clear Survey</button>
-        </div>
+        <button type="submit" className="" onClick={submit}>
+            Create
+        </button>
+
     </>
 )
 }
