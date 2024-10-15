@@ -16,12 +16,14 @@ export const CreateSurveyForm = () => {
         setAnswerOptions(data);
     };
 
-    const addFields = () => {
+    const addFields = (e) => {
+        e.preventDefault();
         let newFields = '';
         setAnswerOptions([...answerOptions, newFields]);
     };
 
-    const removeFields = (index) => {
+    const removeFields = (index, e) => {
+        e.preventDefault();
         let data = [...answerOptions];
         data.splice(index, 1);
         setAnswerOptions(data);
@@ -31,10 +33,12 @@ export const CreateSurveyForm = () => {
         setIsChecked(!isChecked);
     };
 
-    const clearSurvey = () => {
+    const clearSurvey = (e) => {
+        e.preventDefault();
         setProductName('');
         setQuestion('');
         setAnswerOptions(['', '']);
+        setIsChecked(false);
     };
 
     const submit = (e) => {
@@ -43,88 +47,88 @@ export const CreateSurveyForm = () => {
     };
 
     return (
-    <>
-        <form>
-            <div className="form-group">
-                <label className="form-label">
-                    Product Name
-                    <input
-                        type="text"
-                        className="form-control"
-                        name='productName'
-                        value={productName}
-                        onChange={(e) => setProductName(e.target.value)}
-                        required
-                    />
-                </label >
-            </div>
-            <div className="form-group">
-                <label className="form-label">
-                    Question
-                    <textarea
+        <>
+            <form onSubmit={submit}>
+                <div className="form-group">
+                    <label className="form-label">
+                        Product Name
+                        <input
+                            type="text"
+                            className="form-control"
+                            name='productName'
+                            value={productName}
+                            onChange={(e) => setProductName(e.target.value)}
+                            required
+                        />
+                    </label >
+                </div>
+                <div className="form-group">
+                    <label className="form-label">
+                        Question
+                        <textarea
+                            rows={3}
+                            className="form-control"
+                            name='question'
+                            value={question}
+                            onChange={(e) => setQuestion(e.target.value)}
+                            required
+                        />
+                    </label >
+                </div>
+                {answerOptions.map((input, index) => {
+                    return (
+                        <div key={index} className="form-group">
+                            <label className="form-label label-with-remove-button">
+                                Option {index + 1}
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    name="option"
+                                    placeholder='enter option'
+                                    value={input}
+                                    onChange={(e) => handleAnswerOptionsChange(index, e)}
+                                    required
+                                />
+                            </label >
+                            <button className='remove' onClick={(e) => removeFields(index, e)}>- Option</button>
+                        </div>
+                    )
+                })}
+                <div className="form-group">
+                    <label htmlFor='checkbox' className="form-label">
+                        Other Thoughts Section
+                        <input
+                            type="checkbox"
+                            id='checkbox'
+                            className='checkbox'
+                            name='isChecked'
+                            checked={isChecked}
+                            onChange={handleCheckboxChange}
+                        />
+                    </label >
+                </div>
+                {isChecked &&
+                    <textarea readOnly
                         rows={3}
-                        className="form-control"
-                        name='question'
-                        value={question}
-                        onChange={(e) => setQuestion(e.target.value)}
-                        required
+                        className="form-control otherThoughts-textarea"
+                        name='otherThoughts'
+                        value={otherThoughts}
+                        placeholder='This field will appear on our survey.'
+                        onChange={(e) => setOtherThoughts(e.target.value)}
                     />
-                </label >
-            </div>
-            {answerOptions.map((input, index) => {
-                return (
-                    <div key={index} className="form-group">
-                        <label className="form-label label-with-remove-button">
-                            Option {index + 1}
-                            <input
-                                type="text"
-                                className="form-control"
-                                name="option"
-                                placeholder='enter option'
-                                value={input}
-                                onChange={(e) => handleAnswerOptionsChange(index, e)}
-                                required
-                            />
-                        </label >
-                        <button className='remove' onClick={() => removeFields(index)}>- Option</button>
-                    </div>
-                )
-            })}
-            <div className="form-group">
-                <label htmlFor='checkbox' className="form-label">
-                    Other Thoughts Section
-                    <input
-                        type="checkbox"
-                        id='checkbox'
-                        name='isChecked'
-                        checked={isChecked}
-                        onChange={handleCheckboxChange}
-                    />
-                </label >
-            </div>
-            {isChecked &&
-                <textarea
-                    rows={3}
-                    className="form-control"
-                    name='otherThoughts'
-                    value={otherThoughts}
-                    onChange={(e) => setOtherThoughts(e.target.value)}
-                    required
-                />
-            }
-        </form>
+                }
 
-        <div className='side-by-side-buttons'>
-            <button onClick={addFields} className='add'>+ Option</button>
-            <button onClick={clearSurvey} className='clear'>Clear Survey</button>
-        </div>
+                <div className='side-by-side-buttons'>
+                    <button onClick={(e) => addFields(e)} className='add'>+ Option</button>
+                    <button onClick={(e) => clearSurvey(e)} className='clear'>Clear Survey</button>
+                </div>
 
-        <br/>
+                <br/>
 
-        <button type="submit" className="" onClick={submit}>
-            Create
-        </button>
-
-    </>
-)
+                <button type="submit" className="">
+                    Create
+                </button>
+            </form>
+        </>
+    )
 }

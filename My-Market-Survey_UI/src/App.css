@@ -13,6 +13,10 @@ label {
   width: 70%;
 }
 
+input.checkbox {
+  margin-left: 4px;
+}
+
 .app-description {
   color: #888;
 }
@@ -28,4 +32,8 @@ label {
   padding: 2em;
   /* margin: 1.6rem 0rem; */
   border-radius: 32px;
+}
+
+.otherThoughts-textarea {
+  margin-bottom: 10px;
 }
