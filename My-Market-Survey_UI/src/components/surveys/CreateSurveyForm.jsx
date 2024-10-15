@@ -3,12 +3,37 @@ import React, { useState } from 'react'
 export const CreateSurveyForm = () => {
     const [productName, setProductName] = useState("");
     const [question, setQuestion] = useState("");
-    const [numberOfAnswers, setNumberOfAnswers] = useState();
+    const [answerOptions, setAnswerOptions] = useState([
+        '', 
+        ''
+    ]);
     // const [otherThoughts, setOtherThoughts] = useState("");
+
+    const handleAnswerOptionsChange = (index, e) => {
+        let data = [...answerOptions];
+        data[index] = e.target.value;
+        setAnswerOptions(data);
+    };
+
+    const addFields = () => {
+        let newFields = '';
+        setAnswerOptions([...answerOptions, newFields]);
+    };
+
+    const removeFields = (index) => {
+        let data = [...answerOptions];
+        data.splice(index, 1);
+        setAnswerOptions(data);
+    };
+
+    const submit = (e) => {
+        e.preventDefault();
+        console.log(productName, question, answerOptions);
+    };
 
     return (
     <>
-        <form>
+        <form onSubmit={submit}>
             <div className="form-group">
                 <label className="form-label">
                     Product Name
@@ -25,8 +50,8 @@ export const CreateSurveyForm = () => {
             <div className="form-group">
                 <label className="form-label">
                     Question
-                    <input
-                        type="text"
+                    <textarea
+                        rows={3}
                         className="form-control"
                         name='question'
                         value={question}
@@ -35,29 +60,36 @@ export const CreateSurveyForm = () => {
                     />
                 </label >
             </div>
-{/* // TODO: Replace # of answer field with code to add and remove fields to enter answer options, with at least two required */}
-            <div className="form-group">
-                <label className="form-label">
-                    Number of Answer Selections
-                    <input
-                    type="number"
-                    className="form-control"
-                    name='numberOfAnswers'
-                    value={numberOfAnswers}
-                    onChange={(e) => setNumberOfAnswers(e.target.value)}
-                    required
-                    />
-                </label >
-            </div>
+            {answerOptions.map((input, index) => {
+                return (
+                    <div key={index} className="form-group">
+                        <label className="form-label label-with-remove-button">
+                            Option {index + 1}
+                            <input
+                                type="text"
+                                className="form-control"
+                                name="option"
+                                placeholder='enter option'
+                                value={input}
+                                onChange={(e) => handleAnswerOptionsChange(index, e)}
+                                required
+                            />
+                        </label >
+                        <button className='remove' onClick={() => removeFields(index)}>- Option</button>
+                    </div>
+                )
+            })}
+            <button onClick={addFields} className='add'>+ Option</button>
+{/* // TODO: If other thoughts section is checked, a textarea field appears and is required */}
             <div className="form-group">
                 <label className="form-label">
                     Other Thoughts Section
                     <input
-                    type="checkbox"
-                    // className="form-control"
-                    // name='otherThoughts'
-                    // value={otherThoughts}
-                    // onChange={(e) => setOtherThoughts(e.target.value)}
+                        type="checkbox"
+                        // className="form-control"
+                        // name='otherThoughts'
+                        // value={otherThoughts}
+                        // onChange={(e) => setOtherThoughts(e.target.value)}
                     />
                 </label >
             </div>
@@ -66,6 +98,12 @@ export const CreateSurveyForm = () => {
                 Create
             </button>
         </form>
+
+        <br/>
+
+        <div className='side-by-side-buttons'>
+            <button className='clear'>Clear Survey</button>
+        </div>
     </>
 )
 }

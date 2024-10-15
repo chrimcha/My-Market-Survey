@@ -12,7 +12,7 @@ export default function Home() {
             </p>
 
             <Link to={{pathname: '/create-new-survey'}}>
-                <button>Create Survey</button>
+                <button>Create a Survey</button>
             </Link>
         </>
     )

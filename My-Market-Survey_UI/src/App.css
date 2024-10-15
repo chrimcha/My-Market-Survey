@@ -5,6 +5,18 @@
   text-align: center;
 }
 
+label {
+  width: 100%;
+}
+
+.label-with-remove-button {
+  width: 70%;
+}
+
+.app-description {
+  color: #888;
+}
+
 .card {
   padding: 2em;
   border: none;
@@ -16,8 +28,4 @@
   padding: 2em;
   /* margin: 1.6rem 0rem; */
   border-radius: 32px;
-}
-
-.app-description {
-  color: #888;
 }

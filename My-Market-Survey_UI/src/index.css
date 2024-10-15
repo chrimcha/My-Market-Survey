@@ -55,6 +55,39 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+button.add {
+  padding: 0em .6em .2em .6em;
+  margin-left: 3px;
+  background-color: green;
+}
+
+button.add:hover {
+  background-color: white;
+  color: green;
+}
+
+button.remove {
+  padding: 0em .6em .2em .6em;
+  margin-left: 3px;
+  background-color: rgb(204, 0, 0);
+}
+
+button.remove:hover {
+  background-color: white;
+  color: rgb(204, 0, 0);
+}
+
+button.clear {
+  padding: 0em .6em .2em .6em;
+  margin-left: 3px;
+  background-color: skyblue;
+}
+
+button.clear:hover {
+  background-color: white;
+  color: skyblue;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
