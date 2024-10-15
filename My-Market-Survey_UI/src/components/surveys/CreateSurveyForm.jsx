@@ -124,9 +124,9 @@ export const CreateSurveyForm = () => {
                 </div>
 
                 <br/>
-
+{/* // TODO: Preview button displays a preview of the survey on the same page to the right of the form, instead of printing to the console. Put form in a div and preview in a div, wrap both in div to flex display them side by side or in a column when screen is narrow */}
                 <button type="submit" className="">
-                    Create
+                    Preview
                 </button>
             </form>
         </>
