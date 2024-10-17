@@ -77,7 +77,7 @@ export const CreateSurveyForm = () => {
                 </div>
                 {answerOptions.map((input, index) => {
                     return (
-                        <div key={index} className="form-group">
+                        <div key={index} className="form-group option-wrap">
                             <label className="form-label label-with-remove-button">
                                 Option {index + 1}
                                 <input
@@ -90,7 +90,9 @@ export const CreateSurveyForm = () => {
                                     required
                                 />
                             </label >
-                            <button className='remove' onClick={(e) => removeFields(index, e)}>- Option</button>
+                            <button className='remove' onClick={(e) => removeFields(index, e)}>
+                                - Option
+                            </button>
                         </div>
                     )
                 })}

@@ -67,8 +67,10 @@ button.add:hover {
 }
 
 button.remove {
+  white-space: nowrap;
+  align-self: flex-end;
   padding: 0em .6em .2em .6em;
-  margin-left: 3px;
+  margin: 0% 0% 4% 2%;
   background-color: rgb(204, 0, 0);
 }
 

@@ -10,7 +10,7 @@ label {
 }
 
 .label-with-remove-button {
-  width: 70%;
+  /* width: 70%; */
 }
 
 input.checkbox {
@@ -36,4 +36,8 @@ input.checkbox {
 
 .otherThoughts-textarea {
   margin-bottom: 10px;
+}
+
+.option-wrap {
+  display: flex;
 }
