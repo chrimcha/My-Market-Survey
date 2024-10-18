@@ -34,11 +34,12 @@ export const CreateSurveyForm = () => {
     };
 
     const clearSurvey = (e) => {
-        e.preventDefault();
-        setProductName('');
-        setQuestion('');
-        setAnswerOptions(['', '']);
-        setIsChecked(false);
+        // e.preventDefault();
+        // setProductName('');
+        // setQuestion('');
+        // setAnswerOptions(['', '']);
+        // setIsChecked(false);
+        window.location.reload();
     };
 
     const submit = (e) => {
@@ -48,89 +49,123 @@ export const CreateSurveyForm = () => {
 
     return (
         <>
-            <form onSubmit={submit}>
-                <div className="form-group">
-                    <label className="form-label">
-                        Product Name
-                        <input
-                            type="text"
-                            className="form-control"
-                            name='productName'
-                            value={productName}
-                            onChange={(e) => setProductName(e.target.value)}
-                            required
-                        />
-                    </label >
-                </div>
-                <div className="form-group">
-                    <label className="form-label">
-                        Question
-                        <textarea
-                            rows={3}
-                            className="form-control"
-                            name='question'
-                            value={question}
-                            onChange={(e) => setQuestion(e.target.value)}
-                            required
-                        />
-                    </label >
-                </div>
-                {answerOptions.map((input, index) => {
-                    return (
-                        <div key={index} className="form-group option-wrap">
-                            <label className="form-label label-with-remove-button">
-                                Option {index + 1}
+            <div className='form-and-preview'>
+                <div className='survey-form'>
+                    <form onSubmit={submit}>
+                        <div className="form-group">
+                            <label className="form-label">
+                                Product Name
                                 <input
                                     type="text"
                                     className="form-control"
-                                    name="option"
-                                    placeholder='enter option'
-                                    value={input}
-                                    onChange={(e) => handleAnswerOptionsChange(index, e)}
+                                    name='productName'
+                                    value={productName}
+                                    onChange={(e) => setProductName(e.target.value)}
                                     required
                                 />
                             </label >
-                            <button className='remove' onClick={(e) => removeFields(index, e)}>
-                                - Option
-                            </button>
                         </div>
-                    )
-                })}
-                <div className="form-group">
-                    <label htmlFor='checkbox' className="form-label">
-                        Other Thoughts Section
-                        <input
-                            type="checkbox"
-                            id='checkbox'
-                            className='checkbox'
-                            name='isChecked'
-                            checked={isChecked}
-                            onChange={handleCheckboxChange}
-                        />
-                    </label >
-                </div>
-                {isChecked &&
-                    <textarea readOnly
-                        rows={3}
-                        className="form-control otherThoughts-textarea"
-                        name='otherThoughts'
-                        value={otherThoughts}
-                        placeholder='This field will appear on our survey.'
-                        onChange={(e) => setOtherThoughts(e.target.value)}
-                    />
-                }
+                        <div className="form-group">
+                            <label className="form-label">
+                                Question
+                                <textarea
+                                    rows={3}
+                                    className="form-control"
+                                    name='question'
+                                    value={question}
+                                    onChange={(e) => setQuestion(e.target.value)}
+                                    required
+                                />
+                            </label >
+                        </div>
+                        {answerOptions.map((input, index) => {
+                            return (
+                                <div key={index} className="form-group option-wrap">
+                                    <label className="form-label">
+                                        Option {index + 1}
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            name="option"
+                                            placeholder='enter option'
+                                            value={input}
+                                            onChange={(e) => handleAnswerOptionsChange(index, e)}
+                                            required
+                                        />
+                                    </label >
+                                    <button className='remove' onClick={(e) => removeFields(index, e)}>
+                                        - Option
+                                    </button>
+                                </div>
+                            )
+                        })}
+                        <div className="form-group">
+                            <label htmlFor='checkbox' className="form-label">
+                                Other Thoughts Section
+                                <input
+                                    type="checkbox"
+                                    className='checkbox'
+                                    name='isChecked'
+                                    checked={isChecked}
+                                    onChange={handleCheckboxChange}
+                                />
+                            </label >
+                        </div>
 
-                <div className='side-by-side-buttons'>
-                    <button onClick={(e) => addFields(e)} className='add'>+ Option</button>
-                    <button onClick={(e) => clearSurvey(e)} className='clear'>Clear Survey</button>
-                </div>
+                        <div className='side-by-side-buttons'>
+                            <button onClick={(e) => addFields(e)} className='add'>+ Option</button>
+                            <button onClick={(e) => clearSurvey(e)} className='clear'>Clear Survey</button>
+                        </div>
 
-                <br/>
-{/* // TODO: Preview button displays a preview of the survey on the same page to the right of the form, instead of printing to the console. Put form in a div and preview in a div, wrap both in div to flex display them side by side or in a column when screen is narrow */}
-                <button type="submit" className="">
-                    Preview
-                </button>
-            </form>
+                        <br/>
+        {/* // TODO: instead of printing to the console */}
+                        <button type="submit" className="">
+                            Save
+                        </button>
+                    </form>
+                </div>
+                <div>
+                <p>Preview</p>
+                <div className='preview-survey'>
+                    <h3>{productName}</h3>
+                    <label>
+                        Question: 
+                        <p>{question}</p>
+                    </label>
+                    <label>
+                        Select All That Apply
+                        <div className='option-wrap-preview'>
+                            {answerOptions.map((option, index) => {
+                                return (
+                                    <div key={index} className='ck-button'>
+                                        <label>
+                                            <input 
+                                                type='checkbox' hidden
+                                                className='option'
+                                            />
+                                            <span>{option}</span>
+                                        </label>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </label>
+                    {isChecked &&
+                        <label>
+                            Other Thoughts:
+                                <textarea
+                                    rows={3}
+                                    className="form-control otherThoughts-textarea"
+                                    name='otherThoughts'
+                                    value={otherThoughts}
+                                    // placeholder=''
+                                    onChange={(e) => setOtherThoughts(e.target.value)}
+                                />
+                        </label>
+                    }
+                </div>
+                </div>
+            </div>
         </>
     )
 }

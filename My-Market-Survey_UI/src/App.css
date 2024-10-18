@@ -5,12 +5,44 @@
   text-align: center;
 }
 
-label {
-  width: 100%;
+.ck-button {
+  margin: 4px;
+  color: #747bff;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid #747bff;
+  /* overflow: auto; */
+  /* float: left; */
 }
 
-.label-with-remove-button {
-  /* width: 70%; */
+.ck-button:hover {
+  background-color: #747bff;
+  color: white;
+}
+
+.ck-button label {
+  float: left; /* ? */
+  width: 4.0em;
+}
+
+.ck-button label span {
+  text-align: center;
+  padding: 3px 0px;
+  display: block;
+}
+
+.ck-button label input {
+  position: absolute;
+}
+
+.ck-button input:checked + span {
+  background-color: #747bff;
+  color: white;
+  border-radius: 10px;
+}
+
+label {
+  width: 100%;
 }
 
 input.checkbox {
@@ -34,10 +66,39 @@ input.checkbox {
   border-radius: 32px;
 }
 
+.form-and-preview {
+  display: flex;
+  justify-content: space-between;
+}
+
 .otherThoughts-textarea {
   margin-bottom: 10px;
 }
 
 .option-wrap {
   display: flex;
+}
+
+.option-wrap-preview {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.preview-survey {
+  min-width: 400px;
+  height: 93%;
+  background-color: white;
+  border-radius: 5px;
+  border: solid;
+  border-width: 1px;
+  border-color: #bdbdbd;
+  margin-left: 2em;
+  margin-right: .5em;
+  padding: 2em;
+}
+
+.survey-form {
+  min-width: 400px;
+  padding: .5em;
 }
