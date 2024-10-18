@@ -132,7 +132,6 @@ export const CreateSurveyForm = () => {
                         Question: 
                         <p>{question}</p>
                     </label>
-                    <label>
                         Select All That Apply
                         <div className='option-wrap-preview'>
                             {answerOptions.map((option, index) => {
@@ -149,7 +148,6 @@ export const CreateSurveyForm = () => {
                                 )
                             })}
                         </div>
-                    </label>
                     {isChecked &&
                         <label>
                             Other Thoughts:

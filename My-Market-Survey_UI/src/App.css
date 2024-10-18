@@ -38,7 +38,12 @@
 .ck-button input:checked + span {
   background-color: #747bff;
   color: white;
-  border-radius: 10px;
+  border-radius: 9px;
+}
+
+.ck-button:hover input:checked + span {
+  background-color: white;
+  color: #747bff;
 }
 
 label {
