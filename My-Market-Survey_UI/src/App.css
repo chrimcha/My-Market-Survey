@@ -1,0 +1,115 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.ck-button span {
+  margin: 4px;
+  color: #747bff;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid #747bff;
+  width: 4.0em;
+  /* overflow: auto; */
+  /* float: left; */
+}
+
+.ck-button:hover span {
+  background-color: #747bff;
+  color: white;
+}
+
+.ck-button label {
+  float: left;
+  width: 4.0em;
+}
+
+.ck-button label span {
+  text-align: center;
+  padding: 3px 0px;
+  display: block;
+}
+
+.ck-button label input {
+  position: absolute;
+}
+
+.ck-button input:checked + span {
+  background-color: #747bff;
+  color: white;
+}
+
+.ck-button:hover input:checked + span {
+  background-color: white;
+  color: #747bff;
+}
+
+label {
+  width: 100%;
+}
+
+input.checkbox {
+  margin-left: 4px;
+  color-scheme: light;
+  accent-color: teal;
+}
+
+.app-description {
+  color: #888;
+}
+
+.card {
+  padding: 2em;
+  border: none;
+}
+
+.card-survey {
+  background-color: #F2F5F5;
+  /* padding: 42px 42px; */
+  padding: 2em;
+  /* margin: 1.6rem 0rem; */
+  border-radius: 32px;
+}
+
+.form-and-preview {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-control {
+  color-scheme: light;
+}
+
+.otherThoughts-textarea {
+  margin-bottom: 10px;
+}
+
+.option-wrap {
+  display: flex;
+}
+
+.option-wrap-preview {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.preview-survey {
+  min-width: 400px;
+  height: 93%;
+  background-color: white;
+  border-radius: 5px;
+  border: solid;
+  border-width: 1px;
+  border-color: #bdbdbd;
+  margin-left: 2em;
+  margin-right: .5em;
+  padding: 2em;
+}
+
+.survey-form {
+  min-width: 400px;
+  padding: .5em;
+}
