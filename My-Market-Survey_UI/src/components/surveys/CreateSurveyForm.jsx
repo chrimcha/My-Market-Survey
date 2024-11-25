@@ -72,12 +72,13 @@ export const CreateSurveyForm = () => {
             // if (data) {
                 const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(JSON.stringify(data)
                 )}`;
+                // TODO: figure out why "jsonString" is not working as expected, like example code in "export data" sandbox (in bookmarks)
                 console.log(jsonString);
                 const link = document.createElement("a");
-                link.href = jsonString;
-                link.download = jsonString;
-                link.URI = jsonString;
-                open(jsonString);
+                link.href = jsonString; // Makes the <a> tag href as "jsonString" const
+                link.download = jsonString; // link.click(); will download file, but not correctly so far
+                link.URI = jsonString; // Not sure if this dose anything
+                open(jsonString); // Opens to new tab
             // }
         }
     };
