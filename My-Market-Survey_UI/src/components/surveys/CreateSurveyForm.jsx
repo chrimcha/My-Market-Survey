@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
 
 export const CreateSurveyForm = () => {
     const [productName, setProductName] = useState("");
@@ -9,6 +10,23 @@ export const CreateSurveyForm = () => {
     ]);
     const [isChecked, setIsChecked] = useState(false);
     const [otherThoughts, setOtherThoughts] = useState("");
+    const [currentId, setCurrentId] = useState(2);
+    const [data, setData] = useState({
+            id: 1,
+            parentId: null,
+            name: "Orange Tote",
+            question: "Does this bag smell?",
+            options: ["yes", "no", "I can't smell"],
+            otherThoughts: "Is this tote suppose to smell like oranges?"
+        },
+        {
+            id: 2,
+            parentId: null,
+            name: "Turtle Basket",
+            question: "Do turtles love bread?",
+            options: ["What kind of bread?", "no", "yes", "I'm not sure"],
+            otherThoughts: "Buying this basket really got me thinking about what turtles love to eat."
+    });
 
     const handleAnswerOptionsChange = (index, e) => {
         let data = [...answerOptions];
@@ -42,9 +60,48 @@ export const CreateSurveyForm = () => {
         window.location.reload();
     };
 
+    const viewJSONData = () => {
+        if (!confirm("Would you like to see the JSON data?")){
+            // Cancel is clicked
+            e.preventDefault();
+            alert('Cancelled!');
+        } else {
+            // Ok is clicked
+            // console.log(data);
+            // open(data);
+            // if (data) {
+                const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(JSON.stringify(data)
+                )}`;
+                console.log(jsonString);
+                const link = document.createElement("a");
+                link.href = jsonString;
+                link.download = jsonString;
+                link.URI = jsonString;
+                open(jsonString);
+            // }
+        }
+    };
+
     const submit = (e) => {
         e.preventDefault();
-        console.log(productName, question, answerOptions, isChecked);
+        setData(data, {
+            id: currentId + 1,
+            parentId: null,
+            name: productName,
+            question: question,
+            options: answerOptions,
+            otherThoughts: otherThoughts
+        })
+        console.log(data);
+        window.location.reload();
+        // TODO: get data state to update after save is pressed, might go to an alert/popup to make a "New Survey" or "Cancel" options, either reloads page to update state
+        // TODO: after alert/popup is functioning, add either "Edit Survey" or "View All Surveys" option
+        if (data) {
+            const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(JSON.stringify(data)
+            )}`;
+            // console.log(jsonString);
+            open(jsonString);
+        }
     };
 // TODO: Figure out how to unfocus button after click, so that if you press enter it doesn't select button again
     return (
@@ -125,7 +182,7 @@ export const CreateSurveyForm = () => {
                     </form>
                 </div>
                 <div>
-                <p>Preview</p>
+                <p>Preview or <Link onClick={viewJSONData}>View JSON</Link></p>
                 <div className='preview-survey'>
                     <h3>{productName}</h3>
                     <label>
