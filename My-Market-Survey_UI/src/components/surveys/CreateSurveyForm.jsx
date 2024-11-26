@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
+// import.meta.JSON.data.json;
 
 export const CreateSurveyForm = () => {
     const [productName, setProductName] = useState("");
@@ -12,14 +13,14 @@ export const CreateSurveyForm = () => {
     const [otherThoughts, setOtherThoughts] = useState("");
     const [currentId, setCurrentId] = useState(2);
     const [data, setData] = useState({
-            id: 1,
-            parentId: null,
-            name: "Orange Tote",
-            question: "Does this bag smell?",
-            options: ["yes", "no", "I can't smell"],
-            otherThoughts: "Is this tote suppose to smell like oranges?"
-        },
-        {
+        //     id: 1,
+        //     parentId: null,
+        //     name: "Orange Tote",
+        //     question: "Does this bag smell?",
+        //     options: ["yes", "no", "I can't smell"],
+        //     otherThoughts: "Is this tote suppose to smell like oranges?"
+        // },
+        // {
             id: 2,
             parentId: null,
             name: "Turtle Basket",
@@ -76,9 +77,10 @@ export const CreateSurveyForm = () => {
                 console.log(jsonString);
                 const link = document.createElement("a");
                 link.href = jsonString; // Makes the <a> tag href as "jsonString" const
-                link.download = jsonString; // link.click(); will download file, but not correctly so far
+                link.download = "data.json"; // link.click(); will download file, but not correctly so far
+                link.click();
                 link.URI = jsonString; // Not sure if this dose anything
-                open(jsonString); // Opens to new tab
+                open(dataFile); // Opens to new tab
             // }
         }
     };
